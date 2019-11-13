@@ -1,0 +1,124 @@
+{
+  "daily_menu": [
+    {
+      "daily_menu_id": "16507624",
+      "dishes": [
+        {
+          "dish_id": "104089340",
+          "dish_image": "https://www.searchpng.com/wp-content/uploads/2019/01/Healthy-Food-PNG-Picture-715x710.png",
+          "name": "Hot & Sour Chicken Soup",
+          "price": "149",
+          "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris malesuada mollis risus, ut ultricies nisl viverra."
+        }
+      ]
+    },
+      {
+      "daily_menu_id": "16507622",
+       "dishes": [
+        {
+          "dish_id": "104089341",
+          "dish_image": "https://www.searchpng.com/wp-content/uploads/2019/01/Healthy-Food-PNG-Picture-715x710.png",
+          "name": "Chicken Monica",
+          "price": "100",
+          "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris malesuada mollis risus, ut ultricies nisl viverra."
+        }
+      ]
+    },
+      {
+      "daily_menu_id": "16507623",
+       "dishes": [
+        {
+          "dish_id": "104089342",
+          "dish_image":"https://www.searchpng.com/wp-content/uploads/2019/01/Healthy-Food-PNG-Picture-715x710.png",
+          "name": "Veg Noodles Soup",
+          "price": "30",
+          "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris malesuada mollis risus, ut ultricies nisl viverra."
+        }
+      ]
+    },
+      {
+      "daily_menu_id": "16507624",
+       "dishes": [
+        {
+          "dish_id": "104089343",
+          "dish_image": "https://www.searchpng.com/wp-content/uploads/2019/01/Healthy-Food-PNG-Picture-715x710.png",
+          "name": "Tatarák ze sumce s toustem",
+          "price": "500",
+          "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris malesuada mollis risus, ut ultricies nisl viverra."
+        }
+      ]
+    },
+      {
+      "daily_menu_id": "16507625",
+        "dishes": [
+        {
+          "dish_id": "104089344",
+          "dish_image": "https://www.searchpng.com/wp-content/uploads/2019/01/Healthy-Food-PNG-Picture-715x710.png",
+          "name": "Sweet Corn Chicken Soup",
+          "price": "50",
+           "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris malesuada mollis risus, ut ultricies nisl viverra."
+        }
+      ]
+    },
+       {
+      "daily_menu_id": "16507627",
+        "dishes": [
+        {
+          "dish_id": "104089347",
+          "dish_image": "https://www.searchpng.com/wp-content/uploads/2019/01/Healthy-Food-PNG-Picture-715x710.png",
+          "name": "Idly Set",
+          "price": "800",
+           "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris malesuada mollis risus, ut ultricies nisl viverra."
+        }
+      ]
+    },
+      {
+      "daily_menu_id": "16507628",
+        "dishes": [
+        {
+          "dish_id": "104089350",
+          "dish_image": "https://www.searchpng.com/wp-content/uploads/2019/01/Healthy-Food-PNG-Picture-715x710.png",
+          "name": "Aloo Bonda",
+          "price": "300",
+           "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris malesuada mollis risus, ut ultricies nisl viverra."
+        }
+      ]
+    },
+    {
+      "daily_menu_id": "16507630",
+        "dishes": [
+        {
+          "dish_id": "104089355",
+          "dish_image": "https://www.searchpng.com/wp-content/uploads/2019/01/Healthy-Food-PNG-Picture-715x710.png",
+          "name": "Parippu Vada",
+          "price": "100",
+           "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris malesuada mollis risus, ut ultricies nisl viverra."
+        }
+      ]
+    },
+    {
+      "daily_menu_id": "16507631",
+        "dishes": [
+        {
+          "dish_id": "104089356",
+          "dish_image": "https://www.searchpng.com/wp-content/uploads/2019/01/Healthy-Food-PNG-Picture-715x710.png",
+          "name": "Ulli Vada",
+          "price": "650",
+           "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris malesuada mollis risus, ut ultricies nisl viverra."
+        }
+      ]
+    },
+    {
+      "daily_menu_id": "16507631",
+        "dishes": [
+        {
+          "dish_id": "104089357",
+          "dish_image": "https://www.searchpng.com/wp-content/uploads/2019/01/Healthy-Food-PNG-Picture-715x710.png",
+          "name": "Puttu",
+          "price": "750",
+           "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris malesuada mollis risus, ut ultricies nisl viverra."
+        }
+      ]
+    },
+  ]
+}

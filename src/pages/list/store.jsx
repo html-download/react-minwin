@@ -4,8 +4,7 @@ import { createStore } from 'redux';
 const initialState ={
 	
 	restaurants:[],
-	filterRestaurant:[],
-	checkbox_id:[]
+	citydata:[], 
 
 }
 
@@ -17,13 +16,21 @@ const reducer = (state = initialState, action) =>{
 		return { ...state, restaurants: action.restaurants};
 	}
 
-		if(action.type === Constants.FILTERDATA){
-				//console.log("checkbox_id", state.checkbox_id);
+		if(action.type === Constants.DATAFILTER){
 
-		return { ...state, filterRestaurant: state.filterRestaurant.concat({id:action.restaurants}),
-			checkbox_id: state.checkbox_id.concat({id:action.checkvalue_id})};
-			
+			if(action.checkvalue === true){
+
+				return { ...state, citydata: state.citydata.push(action.checkid) }
+
+			}
+			else if (state.citydata > 0){
+
+				return { ...state, citydata: state.citydata.slice(action.checkid) }
+			}
+			return
+
 	}
+
 
 	return state
 }

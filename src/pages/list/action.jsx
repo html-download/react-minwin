@@ -10,16 +10,15 @@ class Actions {
         });
 
     }
-           static filterapi(restaurants, id) {
+       static filterapi(checkvalue, checkid) {
 
         Store.dispatch({
-            type: Constants.FILTERDATA,
-            filterrestaurants: restaurants,
-            checkvalue_id: id
-          
+            type: Constants.DATAFILTER,
+            checkid: checkid,
+            checkvalue: checkvalue
         });
 
-  		  }
+    }  
 
 }
 

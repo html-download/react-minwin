@@ -12,6 +12,7 @@ render(){
 	 console.log("this.props", this.props);
 	 const id = this.state.data.id;
 	  const details=this.state.data
+
 	 //console.log("id", id);
 	
  return(

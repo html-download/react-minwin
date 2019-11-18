@@ -32,6 +32,9 @@ class Detailpage extends Component {
   }
 
   componentDidMount() {
+
+      
+
     scrollToComponent(this.refs.name, {
       offset: 0,
       align: "top",
@@ -45,9 +48,12 @@ class Detailpage extends Component {
     console.log("product props is", this.props.location.restaurant_data);
     console.log("state", this.state);
   }
+
+
+
   render() {
-    var detail = this.props.location.restaurant_data;
-    console.log("detail::", detail);
+var detail = this.props.location.restaurant_data !== undefined ? this.props.location.restaurant_data : null
+      console.log('detail::', detail)
 
     return (
       <div>
@@ -65,10 +71,10 @@ class Detailpage extends Component {
             <div className="detail listing">
               <div className="list_box">
                 <div className="list_img">
-                  <img src="images/rest_logo9.jpg" />
+                  <img src={detail.image_url} />
                 </div>
                 <div className="list_info">
-                  <h4></h4>
+                  <h4>{detail.name}</h4>
                   <p />
                   <div className="status">
                     <i className="fa fa-heart">(4)</i>

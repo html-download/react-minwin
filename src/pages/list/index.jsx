@@ -40,36 +40,13 @@ componentWillUnmount() {
  }
 
  getListItem(){
-/*
-var id = e ? e.target.id : null;
-//check box is checked or not
-// if (e && !e.target.checked) {
-// 	id = null;
-// }
 
-var restaurants = this.state.filter_restaurants.length > 0 ? this.state.filter_restaurants.length : this.state.restaurants;
-var displaylist = (restaurants && restaurants.length > 0) ?
-  restaurants.filter((restaurant) => {  
-         if (id) {
-              return restaurant.city === id;
-            }
-                           		
-            return true;
-
-      }).map(function (restaurants) { 
-        console.log("restaurants", restaurants);
-        return <Restaurantlist  data={restaurants}/>
-          }): null;
-          //console.log("displaylist", displaylist);
-			
-          return displaylist;    */   
 
 	console.log('stateee', this.state.restaurants);
  	const restaurant = this.state.restaurants;
  	console.log('restaurant', restaurant);
 
-var restaurants = this.state.filterRestaurant.length > 0 ? 
-this.state.filterRestaurant : this.state.restaurants;
+var restaurants = this.state.citydata.length > 0 ? this.state.citydata : this.state.restaurants
 
     const displaylist = (restaurants && restaurants.length > 0) ? 
        restaurants.map((restaurants) => { 
@@ -82,69 +59,20 @@ this.state.filterRestaurant : this.state.restaurants;
 
   filterListItem(e){
 
-   var id = (e && e.target.checked === true) || (e && !e.target.checked === false) ? e.target.id : null
-   console.log("e.target.checked", e.target.checked);
-   console.log("id", id);
-
-		
-
-  	//var filtereditem = this.state.filterRestaurant > 0 ? this.state.filterRestaurant :null
-  	//var checkvalue =  e && e.target.checked === true ? e.target.id : null
-
-  	//console.log('checkvalue', checkvalue);
-
- 	console.log('this.state.checkbox_id', this.state.checkbox_id);
-/* var cusine_id_value = (this.state.checkbox_id > 0 ) ?
-  							this.state.checkbox_id.map((value) => {
-
-  								if(value){
-
-  									return value !== id
-  								}
-
-                               return 
-
-  							}) : id*/
-
-  	//console.log('cusine_id_value', cusine_id_value);
+  	var checkvalue = e.target.checked ? true : false 
+    var checkid = (checkvalue === true || checkvalue === false) ? e.target.id : null
 
 
-   var filterRes = (this.state.restaurants && this.state.restaurants.length > 0) ? 
+	console.log('checkvalue', checkvalue);
+	console.log('checkid', checkid);
 
-       this.state.restaurants.filter((restaurants) => { 
-                     if (id) {
-						return restaurants.city === id
-          				  }
-          		  return id
-               
-        }) : null;    
-
-		console.log('filterRes', filterRes);
-
-	 var unchecked_cusine = (this.state.filterRestaurant && this.state.filterRestaurant.length > 0) ? 
-	 
-
-       this.state.filterRestaurant.filter((filterrestaurant) => { 
-                     if (filterrestaurant.id !== filterRes.id) {
-						return filterRes
-          				  }
-          		 		
-               
-        }) : filterRes;
-       
-       console.log("unchecked_cusine", unchecked_cusine);
-       console.log("this.state.filterRestaurant", this.state.filterRestaurant);
-		//Actions.filterapi(unchecked_cusine, id);
-
-		Actions.filterapi(unchecked_cusine, id);
-
-
+	Actions.filterapi(checkvalue, checkid);
   	
   }  
 
  render(){
-	
- console.log('this.state.selected_cusines', this.state.selected_cusines);
+ console.log('this.state.citydata', this.state.citydata);	
+
 return(
 
  <div className="page_content full_row">

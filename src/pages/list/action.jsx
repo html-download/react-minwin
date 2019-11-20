@@ -10,15 +10,26 @@ class Actions {
         });
 
     }
-       static filterapi(checkvalue, checkid) {
+       static filterapi(checkvalue, checkid, filterCity) {
 
         Store.dispatch({
             type: Constants.DATAFILTER,
             checkid: checkid,
-            checkvalue: checkvalue
+            checkvalue: checkvalue,
+            filterCity: filterCity
         });
 
-    }  
+    } 
+
+     static filterprice(checkvalue, checkid, filterprice){
+
+         Store.dispatch({
+             type: Constants.DATAPRICE,
+             checkid: checkid,
+            checkvalue: checkvalue,
+            filterprice: filterprice
+         })
+     }
 
 }
 

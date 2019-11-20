@@ -2,10 +2,8 @@ import React, { Component } from 'react';
 
 import Store from './store';
 import Actions from './action';
-
 //components
 import Restaurantlist from './_restaurantlist.jsx';
-
 class Restaurant extends Component{
  constructor(props){
  	super(props);
@@ -15,8 +13,7 @@ class Restaurant extends Component{
  }
 
  componentDidMount(){
-
- this.unsubscribeStore = Store.subscribe(this.onStoreChange.bind(this));
+   this.unsubscribeStore = Store.subscribe(this.onStoreChange.bind(this));
 
  		 fetch('https://opentable.herokuapp.com/api/restaurants?state=IL')
  		 .then((response) => response.json())
@@ -25,30 +22,26 @@ class Restaurant extends Component{
          let restaurants = response.restaurants;
          Actions.getapi(restaurants);
         })
-
-
  }
-
 
 componentWillUnmount() {
          this.unsubscribeStore();
  }
 
- onStoreChange() {
+onStoreChange() {
 
         this.setState(Store.getState());
  }
 
  getListItem(){
-
-
-	console.log('stateee', this.state.restaurants);
+    console.log('stateee', this.state.restaurants);
  	const restaurant = this.state.restaurants;
  	console.log('restaurant', restaurant);
 
-var restaurants = this.state.citydata.length > 0 ? this.state.citydata : this.state.restaurants
 
-    const displaylist = (restaurants && restaurants.length > 0) ? 
+ 	var restaurants =  this.state.filterCitydata.length > 0 ? this.state.filterCitydata : this.state.restaurants;
+
+      const displaylist = (restaurants && restaurants.length > 0) ? 
        restaurants.map((restaurants) => { 
                 console.log('restaurantss', restaurants)
                 return (<Restaurantlist {...this.state} data={restaurants}/>)
@@ -59,19 +52,53 @@ var restaurants = this.state.citydata.length > 0 ? this.state.citydata : this.st
 
   filterListItem(e){
 
-  	var checkvalue = e.target.checked ? true : false 
-    var checkid = (checkvalue === true || checkvalue === false) ? e.target.id : null
+         var checkvalue = e.target.checked ? true : false 
+         var checkid = (checkvalue === true || checkvalue === false) ? e.target.id : null
+         var filterCity = (this.state.restaurants && this.state.restaurants.length > 0) ? 
+         this.state.restaurants.filter((restaurants) => { 
+                     if (checkid) {
+						return restaurants.city === checkid
+          				  }
+          		  return checkid
+               
+        }) : null; 
 
-
-	console.log('checkvalue', checkvalue);
+    console.log('checkvalue', checkvalue);
 	console.log('checkid', checkid);
-
-	Actions.filterapi(checkvalue, checkid);
+    Actions.filterapi(checkvalue, checkid, filterCity);
   	
   }  
 
- render(){
- console.log('this.state.citydata', this.state.citydata);	
+  filterprice(e){
+  	  var checkvalue = e.target.checked ? true : false 
+      var checkid = (checkvalue === true || checkvalue === false) ? e.target.id : null
+      console.log("checkid", checkid);
+
+    var filterprice = (this.state.restaurants && this.state.restaurants.length > 0) ? 
+         this.state.restaurants.filter((restaurants) => { 
+                     if (checkid) {
+						return restaurants.price === checkid
+          				  }
+          		  return checkid
+               
+        }) : null; 
+
+     Actions.filterprice(checkvalue, checkid, filterprice);
+  }
+
+ sortingalpha(e){
+ 	 var checkvalue = e.target.checked ? true : false 
+      var checkid = (checkvalue === true || checkvalue === false) ? e.target.id : null
+      console.log("checkid", checkid);
+
+      var sortrestaurant = (this.state.restaurants).sort(a, b) => (a.name > b.name) ? 1 : -1
+      console.log("sortrestaurant", sortrestaurant);
+     
+ }
+
+render(){
+console.log('this.state.citydata', this.state.citydata);	
+console.log("filterCitydata", this.state.filterCitydata);
 
 return(
 
@@ -97,11 +124,11 @@ return(
 							</li>
 							<li>
 								<input id="Wheeling" type="checkbox" className="hide" onChange={(e)=> this.filterListItem(e)} />
-								<label for="Wheeling" className="checkbox">Indian</label>
+								<label for="Wheeling" className="checkbox">"Wheeling</label>
 							</li>
 							<li>
 								<input id="Rock Island" type="checkbox" className="hide" onChange={(e)=> this.filterListItem(e)}/>
-								<label for="Rock Island" className="checkbox">Maxican</label>
+								<label for="Rock Island" className="checkbox">Rock Island</label>
 							</li>
 							<li>
 								<input id="cb_American" type="checkbox" className="hide" />
@@ -137,16 +164,16 @@ return(
 						<h4><a data-toggle="collapse" href="#filter_2">Price Range</a></h4>
 						<ul id="filter_2" className="reset collapse in show">
 							<li>
-								<input id="price_2" type="checkbox" className="hide"/>
-								<label for="price_2" className="checkbox">300</label>
+								<input id="price_2" type="checkbox" className="hide" onChange={(e)=> this.filterprice(e)}/>
+								<label for="price_2" className="checkbox">2</label>
 							</li>
 							<li>
-								<input id="price_3" type="checkbox" className="hide"/>
-								<label for="price_3" className="checkbox">1000</label>
+								<input id="price_3" type="checkbox" className="hide" onChange={(e)=> this.filterprice(e)}/>
+								<label for="price_3" className="checkbox">3</label>
 							</li>
 							<li>
-								<input id="price_4" type="checkbox" className="hide"/>
-								<label for="price_4" className="checkbox">1000</label>
+								<input id="price_4" type="checkbox" className="hide" onChange={(e)=> this.filterprice(e)}/>
+								<label for="price_4" className="checkbox">4</label>
 							</li>
 						</ul>
 
@@ -253,7 +280,7 @@ return(
 								<label for="cb_Popularity" className="radio">Popularity</label>
 							</li>
 							<li>
-								<input id="cb_AZ" name="sort" type="radio" className="hide"/>
+								<input id="cb_AZ" name="sort" type="radio" className="hide" onChange={(e)=> this.sortingalpha(e)}/>
 								<label for="cb_AZ" className="radio">A- Z</label>
 							</li>
 							<li>

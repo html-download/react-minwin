@@ -5,16 +5,18 @@ class Restaurantlist extends Component{
 
 constructor(props){
 	super(props);
-	this.state = this.props;
-
+	this.state = this.props
+	console.log("this.props", this.props);
 }
 render(){
-	 console.log("this.props", this.props);
+	 
 	 const id = this.state.data.id;
-	  const details=this.state.data
+	  const details = this.state.data
 
 	 //console.log("id", id);
 	
+
+
  return(
 
   <div className="list_box wow fadeInUp" key={`key_${this.state.id}`}>
@@ -22,11 +24,11 @@ render(){
 							<Link to={{
 								pathname:`/detail/${id}`,
 								restaurant_data: details
-							}} ><img src={this.state.img}/></Link>
+							}} ><img src={this.state.data.image_url}/></Link>
 						</div>
 						<div className="list_info">
-							<h4><Link to="/detail">{this.state.name}</Link></h4>
-							<p>{this.state.address}</p>
+							<h4><Link to="/detail">{this.state.data.name}</Link></h4>
+							<p>{this.state.data.address}</p>
 							<i className="fa fa-heart">(4)</i>
 						</div>
 						<div className="rating">

@@ -13,17 +13,41 @@ import {
   Row,
   Col
 } from "reactstrap";
+import {Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import classnames from "classnames";
 import scrollToComponent from "react-scroll-to-component";
+// components
+import Store from './store';
+import Actions from './action';
+import cusinielist from './_cusinielist.jsx';
+// json
+//var data = require('./api.json');
+
+
 class Detailpage extends Component {
   constructor(props) {
     super(props);
 
+    this.state = Store.getState();
     this.toggle = this.toggle.bind(this);
     this.state = {
-      activeTab: "1"
+      activeTab: "1",
+         modal: false
     };
+     this.toggle = this.toggle.bind(this);
+        this.modal = this.modal.bind(this);
   }
+
+ toggle() {
+        this.setState(prevState => ({
+            dropdownOpen: !prevState.dropdownOpen
+        }));
+    }
+    modal() {
+        this.setState(prevState => ({
+            modal: !prevState.modal
+        }));
+    }
 
   toggle(tab) {
     if (this.state.activeTab !== tab) {
@@ -33,9 +57,7 @@ class Detailpage extends Component {
 
   componentDidMount() {
 
-      
-
-    scrollToComponent(this.refs.name, {
+ scrollToComponent(this.refs.name, {
       offset: 0,
       align: "top",
       duration: 500,
@@ -47,11 +69,53 @@ class Detailpage extends Component {
     console.log("url_id", id);
     console.log("product props is", this.props.location.restaurant_data);
     console.log("state", this.state);
+
+    // main fuctions
+
+
+ this.unsubscribeStore = Store.subscribe(this.onStoreChange.bind(this));
+
+      fetch('http://192.168.1.71:9001/users')
+      .then((response) => response.json())
+      .then((response) => {
+                
+         let cusinie = response.data;
+         Actions.getapi(cusinie);
+        })
+      
+
   }
 
+componentWillUnmount() {
+         this.unsubscribeStore();
+ }
 
+onStoreChange() {
+
+        this.setState(Store.getState());
+ }
+
+
+ getcusinieitem(){
+
+      var cusinieslist =  this.state.cusiniedata;
+
+     console.log('this.state.cusiniedataa',  this.state.cusiniedata);
+    
+     var cusinie = cusinieslist ?
+
+      cusinieslist.map((cusine) => { 
+              
+                return (<cusinielist {...this.state} key={cusine.id * Math.random()} data={cusine}/>)
+        }) : null 
+
+     return cusinie
+}
 
   render() {
+  
+
+
 var detail = this.props.location.restaurant_data !== undefined ? this.props.location.restaurant_data : null
       console.log('detail::', detail)
 
@@ -71,10 +135,10 @@ var detail = this.props.location.restaurant_data !== undefined ? this.props.loca
             <div className="detail listing">
               <div className="list_box">
                 <div className="list_img">
-                  <img src={detail.image_url} />
+                 {/*<img src={detail.image_url} />*/}
                 </div>
                 <div className="list_info">
-                  <h4>{detail.name}</h4>
+                 {/* <h4>{detail.name}</h4>*/}
                   <p />
                   <div className="status">
                     <i className="fa fa-heart">(4)</i>
@@ -242,133 +306,16 @@ var detail = this.props.location.restaurant_data !== undefined ? this.props.loca
                          <h4   ref={section => {
                               this.Violet = section;
                             }}>Starters</h4>
-                          <div className="menu_list violet">
-                            
-                            <div className="img">
-                              <a href="menu-detail.html">
-                                <img src="images/item_1.jpg" />
-                              </a>
-                            </div>
-                            <h5>
-                              <a href="menu-detail.html">Chilli Chicken</a>
-                            </h5>
-                            <p className="grey_text">
-                              Lorem ipsum dolor sit amet, consectetur adipiscing
-                              elit. Mauris malesuada mollis risus, ut ultricies
-                              nisl viverra.
-                            </p>
-                            <span className="price">SAR 50.00</span>
-                            <a
-                              data-toggle="modal"
-                              data-target="#modal_ingredients"
-                              className="btn"
-                            >
-                              <i className="fa fa-plus-circle" /> Add
-                            </a>
-                          </div>
+                        
+                         
 
-                          <div className="menu_list indigo">
-                            <div className="img">
-                              <a href="menu-detail.html">
-                                <img src="images/item_2.jpg" />
-                              </a>
-                            </div>
-                            <h5>
-                              <a href="menu-detail.html">Chicken Monica</a>
-                            </h5>
-                            <p className="grey_text">
-                              Lorem ipsum dolor sit amet, consectetur adipiscing
-                              elit. Mauris malesuada mollis risus, ut ultricies
-                              nisl viverra.
-                            </p>
-                            <span className="price">
-                              <b>SAR 100</b>.00
-                            </span>
-                            <a
-                              data-toggle="modal"
-                              data-target="#modal_ingredients"
-                              className="btn"
-                            >
-                              <i className="fa fa-plus-circle" /> Add
-                            </a>
-                          </div>
+                              {this.getcusinieitem()}
 
-                          <div className="menu_list">
-                            <div className="img">
-                              <a href="menu-detail.html">
-                                <img src="images/item_3.jpg" />
-                              </a>
-                            </div>
-                            <h5>
-                              <a href="menu-detail.html">Chicken 65</a>
-                            </h5>
-                            <p className="grey_text">
-                              Lorem ipsum dolor sit amet, consectetur adipiscing
-                              elit. Mauris malesuada mollis risus, ut ultricies
-                              nisl viverra.
-                            </p>
-                            <span className="price">SAR 60.00</span>
-                            <a
-                              data-toggle="modal"
-                              data-target="#modal_ingredients"
-                              className="btn"
-                            >
-                              <i className="fa fa-plus-circle" /> Add
-                            </a>
-                          </div>
-
-                          <div className="menu_list">
-                            <div className="img">
-                              <a href="menu-detail.html">
-                                <img src="images/item_4.jpg" />
-                              </a>
-                            </div>
-                            <h5>
-                              <a href="menu-detail.html">Chicken Kabab</a>
-                            </h5>
-                            <p className="grey_text">
-                              Lorem ipsum dolor sit amet, consectetur adipiscing
-                              elit. Mauris malesuada mollis risus, ut ultricies
-                              nisl viverra.
-                            </p>
-                            <span className="price">SAR 50.00</span>
-                            <a
-                              data-toggle="modal"
-                              data-target="#modal_ingredients"
-                              className="btn"
-                            >
-                              <i className="fa fa-plus-circle" /> Add
-                            </a>
-                          </div>
-                          <div className="menu_list">
-                            <div className="img">
-                              <a href="menu-detail.html">
-                                <img src="images/item_5.jpg" />
-                              </a>
-                            </div>
-                            <h5>
-                              <a href="menu-detail.html">Chicken Lollypop</a>
-                            </h5>
-                            <p className="grey_text">
-                              Lorem ipsum dolor sit amet, consectetur adipiscing
-                              elit. Mauris malesuada mollis risus, ut ultricies
-                              nisl viverra.
-                            </p>
-                            <span className="price">
-                              <b>SAR 100</b>.00
-                            </span>
-                            <a
-                              data-toggle="modal"
-                              data-target="#modal_ingredients"
-                              className="btn"
-                            >
-                              <i className="fa fa-plus-circle" /> Add
-                            </a>
-                          </div>
 
                             <h4 ref={section => {
                               this.Indigo = section;
                             }}>Veg Main</h4>
+
                           <div
                             className="menu_list">
                             
@@ -386,14 +333,33 @@ var detail = this.props.location.restaurant_data !== undefined ? this.props.loca
                               nisl viverra.
                             </p>
                             <span className="price">SAR 50.00</span>
+                            
                             <a
                               data-toggle="modal"
                               data-target="#modal_ingredients"
                               className="btn"
+                               onClick={ this.modal }
                             >
                               <i className="fa fa-plus-circle" /> Add
                             </a>
+                                
+
+<Modal isOpen={ this.state.modal } toggle={ this.modal } modalClassName="login_modal">
+    <ModalHeader toggle={ this.modal }>
+        <h5 className="modal-title">
+        Login </h5> 
+      
+    </ModalHeader>
+
+    <ModalBody >
+        
+        
+    </ModalBody>
+</Modal>
+
+
                           </div>
+
                           <div className="menu_list">
                             <div className="img">
                               <a href="menu-detail.html">

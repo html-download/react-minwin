@@ -4,6 +4,7 @@ import Store from './store';
 import Actions from './action';
 //components
 import Restaurantlist from './_restaurantlist.jsx';
+import Checkbox  from './checkboxcontrol.jsx';
 class Restaurant extends Component{
  constructor(props){
  	super(props);
@@ -38,8 +39,25 @@ onStoreChange() {
  	const restaurant = this.state.restaurants;
  	console.log('restaurant', restaurant);
 
+ 	var restaurants;
 
- 	var restaurants =  this.state.filterCitydata.length > 0 ? this.state.filterCitydata : this.state.restaurants;
+ 	if(this.state.filterCitydata.length > 0 ){
+
+ 	    restaurants = this.state.filterCitydata
+
+ 	}
+ 	else if ( this.state.azsort.length > 0){
+
+ 		restaurants = this.state.azsort
+ 	}
+
+ 	else {
+ 		restaurants = this.state.restaurants
+ 	}
+
+/*
+ 	var restaurants =  this.state.filterCitydata.length > 0 ? 
+ 	this.state.filterCitydata : this.state.restaurants;*/
 
       const displaylist = (restaurants && restaurants.length > 0) ? 
        restaurants.map((restaurants) => { 
@@ -91,15 +109,40 @@ onStoreChange() {
       var checkid = (checkvalue === true || checkvalue === false) ? e.target.id : null
       console.log("checkid", checkid);
 
-      var sortrestaurant = (this.state.restaurants).sort(a, b) => (a.name > b.name) ? 1 : -1
+      var sortrestaurant = (this.state.restaurants).sort((a, b) => (a.name > b.name) ? 1 : -1)
       console.log("sortrestaurant", sortrestaurant);
+       Actions.sortres(sortrestaurant, checkvalue);   
      
+ }
+
+ checkoutcity(e){
+
+
+ 	var chkbox = this.state.checkoutCity.map((checkcity, key) => {
+
+ 			return(<li key={`form-group-checkbox-${Math.random()}`}>{
+
+ 			<Checkbox className="checkbox"
+				title={checkcity}
+				options={checkcity}	
+				name={checkcity}	
+				onChange={(e)=> this.filterListItem(e)}
+				value={checkcity}
+				groupClasses={ {'form-group' : true, 'new-class' : true} }
+				labelClasses={ {'checkbox-from' : true} }
+				inputClasses={ {'new-class' : true} }
+					/>
+
+
+ 			} </li>)
+ 		})
+return chkbox;
  }
 
 render(){
 console.log('this.state.citydata', this.state.citydata);	
 console.log("filterCitydata", this.state.filterCitydata);
-
+console.log("azsort", this.state.azsort);
 return(
 
  <div className="page_content full_row">
@@ -118,46 +161,8 @@ return(
 						<h4><a data-toggle="collapse" href="#filter_1">Cuisines</a></h4>
 						<ul id="filter_1" className="reset collapse in show">
 						
-							<li>
-								<input id="Chicago" type="checkbox" className="hide" onChange={(e)=> this.filterListItem(e)}/>
-								<label for="Chicago" className="checkbox">Chicago</label>
-							</li>
-							<li>
-								<input id="Wheeling" type="checkbox" className="hide" onChange={(e)=> this.filterListItem(e)} />
-								<label for="Wheeling" className="checkbox">"Wheeling</label>
-							</li>
-							<li>
-								<input id="Rock Island" type="checkbox" className="hide" onChange={(e)=> this.filterListItem(e)}/>
-								<label for="Rock Island" className="checkbox">Rock Island</label>
-							</li>
-							<li>
-								<input id="cb_American" type="checkbox" className="hide" />
-								<label for="cb_American" className="checkbox">American</label>
-							</li>
-							<li>
-								<input id="cb_Chinese" type="checkbox" className="hide" />
-								<label for="cb_Chinese" className="checkbox">Chinese</label>
-							</li>
-							<li>
-								<input id="cb_Desserts" type="checkbox" className="hide" />
-								<label for="cb_Desserts" className="checkbox">Indian Desserts</label>
-							</li>
-							<li>
-								<input id="cb_International" type="checkbox" className="hide" />
-								<label for="cb_International" className="checkbox">International Desserts</label>
-							</li>
-							<li>
-								<input id="cb_North" type="checkbox" className="hide" />
-								<label for="cb_North" className="checkbox">North Indian</label>
-							</li>
-							<li>
-								<input id="cb_Rajasthani" type="checkbox" className="hide" />
-								<label for="cb_Rajasthani" className="checkbox">Rajasthani</label>
-							</li>
-							<li>
-								<input id="cb_South" type="checkbox" className="hide" />
-								<label for="cb_South" className="checkbox">South Indian</label>
-							</li>
+							{this.checkoutcity()}
+							
 						</ul>
 						
 

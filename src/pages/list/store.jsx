@@ -6,7 +6,9 @@ const initialState ={
 	restaurants:[],
 	citydata:[], 
 	filterCitydata:[],
-	filterpricedata:[]
+	filterpricedata:[],
+	azsort:[],
+	checkoutCity: ['Chicago','Wheeling','Rock IslandRock']
 
 }
 
@@ -15,6 +17,13 @@ const reducer = (state = initialState, action) =>{
  if(action.type === Constants.DATAFETCH){
    //console.log("{ ...state, restaurants: action.restaurants}", { ...state, restaurants: action.restaurants});
 	return { ...state, restaurants: action.restaurants};
+  }
+
+  if(action.type === Constants.RESTAURANTFILTER){
+  		if(action.checkvalue === true){
+  			console.log("{ ...state, azsort: action.sortrestaurant}", { ...state, azsort: action.sortrestaurant});
+   			return {...state, azsort: action.sortrestaurant}
+  		}
   }
 
   if(action.type === Constants.DATAFILTER){

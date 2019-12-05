@@ -43,7 +43,7 @@ const reducer = (state = initialState, action) =>{
 
     if(action.type === Constants.DATAPRICE){
 			if(action.checkvalue === true){
-
+				
 				return{...state, filterpricedata: state.filterpricedata.concat(action.filterprice)}
 			}
 			else if(action.checkvalue === false){

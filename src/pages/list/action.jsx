@@ -21,14 +21,14 @@ class Actions {
 
     } 
 
-     static filterprice(checkvalue, checkid, filterprice){
+     static filterprice(checkvalue, check_i_d, filterPrice){
 
          Store.dispatch({
              type: Constants.DATAPRICE,
-             checkid: checkid,
-            checkvalue: checkvalue,
-            filterprice: filterprice
-         })
+             checkid: check_i_d,
+             checkvalue: checkvalue,
+            filterprice: filterPrice
+         });
      }
 
 }

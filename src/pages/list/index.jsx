@@ -1,3 +1,4 @@
+https://stackoverflow.com/questions/34094806/return-from-a-promise-then
 import React, { Component } from 'react';
 
 import Store from './store';

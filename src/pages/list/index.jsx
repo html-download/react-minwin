@@ -33,18 +33,53 @@ componentDidUpdate() {
    
    if (this.state.filterCitydata.length > 0 ){
 
-   	const promise1 = new Promise((resolve, reject) => {
+   	/*const promise1 = new Promise((resolve, reject) => {
 
-   		if (a) {
-
-   			
-		    resolve("Stuff worked!");
-		  }
+   		var prm_data1 = this.state.filterCitydata;
+   				
+   		return prm_data1
 		
 		});
 
+   		promise1.then(function (data1) {
+			    var a = (data1);
+			    console.log("kiwi", a);
 
-   }
+			   var original = Promise.resolve(33);
+	var cast = Promise.resolve(original);
+	cast.then(function(value) {
+	  console.log('value: ' + value);
+	});
+	console.log('original === cast ? ' + (original === cast));
+
+  var data1 = this.state.filterCitydata;
+   var cast = Promise.resolve(data1);
+   console.log("cast", cast);
+           cast.then(function(value) {
+  
+		return value
+		 	
+
+		});
+			  })*/
+var res_state = this.state.restaurants			  
+
+  function justTesting(input) {
+
+			new Promise(function(resolve, reject) {
+		 	resolve(input);
+		 })
+
+	}
+
+	justTesting(res_state).then(function(restaurantstate) {
+
+	   	restaurantstate.filter((filercity)
+	   
+	});
+
+
+  }
 
 }
 
@@ -98,14 +133,14 @@ onStoreChange() {
      var type = typeof (check_i_d) // string
       console.log("type", type);
     
-     var filterPrice = (this.state.restaurants && this.state.restaurants.length > 0) ? 
+     var filterPrice = 
          this.state.restaurants.filter((restaurants) => { 
                      if (check_i_d) {
 						return parseInt(restaurants.price) === check_i_d
           				  }
           		  return
                
-        }) : null; 
+        }) 
 
     console.log('checkvalue', checkvalue);
 	console.log('check_i_d', check_i_d);

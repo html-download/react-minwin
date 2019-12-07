@@ -1,4 +1,3 @@
-https://stackoverflow.com/questions/34094806/return-from-a-promise-then
 import React, { Component } from 'react';
 
 import Store from './store';
@@ -64,18 +63,25 @@ componentDidUpdate() {
 		});
 			  })*/
 var res_state = this.state.restaurants			  
-
-  function justTesting(input) {
+var checked_citydata = this.state.citydata
+  var promise1 = function justTesting(res_state) {
 
 			new Promise(function(resolve, reject) {
-		 	resolve(input);
+		 	resolve(res_state);
 		 })
 
 	}
 
-	justTesting(res_state).then(function(restaurantstate) {
+	promise1.then(function(restaurantstate) {
 
-	   	restaurantstate.filter((filercity)
+	   var chocky = restaurantstate.filter((filercity) => {
+	   	console.log(chocky);
+	   		 if(checked_citydata){
+	   		 	return filercity.city === checked_citydata
+	   		 }
+
+			return checked_citydata  		 
+	   	})
 	   
 	});
 

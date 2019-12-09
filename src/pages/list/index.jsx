@@ -63,27 +63,54 @@ componentDidUpdate() {
 		});
 			  })*/
 var res_state = this.state.restaurants			  
-var checked_citydata = this.state.citydata
-  var promise1 = function justTesting(res_state) {
+var checked_citydata = this.state.citydata.length > 0 ? "Chicago" : null
+var pricedata = this.state.filterpricedata
+  function justTesting(res_state) {
+		return new Promise(function(resolve, reject) {
+				console.log('res_state', res_state);
+    	        console.log('checked_citydata', checked_citydata);
 
-			new Promise(function(resolve, reject) {
-		 	resolve(res_state);
-		 })
+			    	 var lucky = res_state.filter(function(res_state) {
+								if(checked_citydata){
+									return res_state.city == checked_citydata
+		  					       }
+								return checked_citydata
+								});
+					resolve(lucky);
+				 })
+			}
 
-	}
+justTesting(res_state).then(function(pricefilter){
 
-	promise1.then(function(restaurantstate) {
+			console.log('pricedata', pricedata)
 
-	   var chocky = restaurantstate.filter((filercity) => {
-	   	console.log(chocky);
-	   		 if(checked_citydata){
-	   		 	return filercity.city === checked_citydata
-	   		 }
+			console.log('pricefilter', pricefilter)
 
-			return checked_citydata  		 
-	   	})
-	   
-	});
+			 var arrayScores = pricedata.map(el => el.price);
+					var arrayprice = (arrayScores[0])
+
+				var get_filterprice = pricefilter.filter(function(el){
+     				console.log('get_filterprice', get_filterprice);
+     				console.log('arrayprice', arrayprice);
+     					var Sola;
+     							return test = (el.name === Sola) ? 0 : 1;
+
+     							/*if(arrayprice){
+
+     								return el.price == arrayprice
+     							}
+
+     							return arrayprice*/
+						})
+
+
+
+     log(pricefilter);
+})
+
+function log(pricefilter) {
+  console.log('final', pricefilter)
+}
 
 
   }
@@ -99,7 +126,26 @@ onStoreChange() {
     console.log('stateee', this.state.restaurants);
  	const restaurant = this.state.restaurants;
  	console.log('restaurant', restaurant);
- 	var restaurants =  this.state.filterCitydata.length > 0 ? this.state.filterCitydata : this.state.restaurants;
+ 		var restaurants;
+
+ 	if(this.state.filterCitydata.length > 0 ){
+
+ 	    restaurants = this.state.filterCitydata
+
+ 	}
+ 	else if ( this.state.filterpricedata.length > 0){
+
+ 		restaurants = this.state.filterpricedata
+ 	}
+
+ 	else if ( this.state.azsort.length > 0){
+
+ 		restaurants = this.state.azsort
+ 	}
+
+ 	else {
+ 		restaurants = this.state.restaurants
+ 	}
 
       const displaylist = (restaurants && restaurants.length > 0) ? 
        restaurants.map((restaurants) => { 

@@ -33,38 +33,9 @@ componentDidUpdate() {
    
    if (this.state.filterCitydata.length > 0 ){
 
-   	/*const promise1 = new Promise((resolve, reject) => {
-
-   		var prm_data1 = this.state.filterCitydata;
-   				
-   		return prm_data1
-		
-		});
-
-   		promise1.then(function (data1) {
-			    var a = (data1);
-			    console.log("kiwi", a);
-
-			   var original = Promise.resolve(33);
-	var cast = Promise.resolve(original);
-	cast.then(function(value) {
-	  console.log('value: ' + value);
-	});
-	console.log('original === cast ? ' + (original === cast));
-
-  var data1 = this.state.filterCitydata;
-   var cast = Promise.resolve(data1);
-   console.log("cast", cast);
-           cast.then(function(value) {
-  
-		return value
-		 	
-
-		});
-			  })*/
-var res_state = this.state.restaurants			  
+var res_state = this.state.restaurants;			  
 var checked_citydata = this.state.citydata.length > 0 ? "Chicago" : null
-var pricedata = this.state.filterpricedata
+var checked_price = (this.state.filterpricedata.length > 0 ) ? this.state.filterpricedata :false
   function justTesting(res_state) {
 		return new Promise(function(resolve, reject) {
 				console.log('res_state', res_state);
@@ -80,40 +51,53 @@ var pricedata = this.state.filterpricedata
 				 })
 			}
 
+
 justTesting(res_state).then(function(pricefilter){
+		console.log('pricefilter', pricefilter)
 
-			console.log('pricedata', pricedata)
-
-			console.log('pricefilter', pricefilter)
-
-			 var arrayScores = pricedata.map(el => el.price);
-					var arrayprice = (arrayScores[0])
-
-				var get_filterprice = pricefilter.filter(function(el){
-     				console.log('get_filterprice', get_filterprice);
-     				console.log('arrayprice', arrayprice);
-     					var Sola;
-     							return test = (el.name === Sola) ? 0 : 1;
-
-     							/*if(arrayprice){
-
-     								return el.price == arrayprice
-     							}
-
-     							return arrayprice*/
-						})
-
-
-
-     log(pricefilter);
-})
-
-function log(pricefilter) {
-  console.log('final', pricefilter)
+			var ducky = (checked_price.length > 0) ? checked_price : null
+			var arrayScores = ducky.map(el => el.price);
+				 var arrayprice = (arrayScores[0]);
+				console.log('arrayprice', arrayprice);
+			
+				var lucky1 = pricefilter.filter(function(pricefilter) {
+								if(checked_price){
+									return pricefilter.city === checked_price
+		  					       }
+								return checked_citydata
+								});
+console.log('lucky1', lucky1);
+		
+	})
 }
 
+/*function log(pricefilter) {
+  console.log('final', pricefilter)
 
-  }
+  		 if (this.state.filterpricedata.length > 0 ){
+  		 		var arrayScores = this.state.filterpricedata.map(el => el.price);
+				 var arrayprice = (arrayScores[0]);
+				console.log('arrayprice', arrayprice);
+  		 }
+}*/
+
+ if (this.state.filterpricedata.length > 0 ){
+	 		var arrayScores = this.state.filterpricedata.map(el => el.price);
+	 var arrayprice = (arrayScores[0]);
+	console.log('arrayprice', arrayprice); 
+		 function justTesting1(arrayprice) {
+		return new Promise(function(resolve, reject) {
+			resolve(arrayprice);
+		})
+
+	}
+
+	justTesting1(arrayprice).then(function(arrayprice){
+		console.log('arrayprice', arrayprice)
+		
+	})
+ }
+
 
 }
 

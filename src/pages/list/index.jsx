@@ -30,9 +30,37 @@ componentWillUnmount(props) {
 
 
 componentDidUpdate() {
-   
-   if (this.state.filterCitydata.length > 0 ){
 
+ var getdata = (this.state.filterCitydata.length > 0)  ? this.linkcity() : null
+			
+}
+
+ linkcity(){
+
+ 	var res_state = this.state.restaurants;	
+        this.justTesting(res_state).then(function(pricefilter){
+	     console.log('pricefilter', pricefilter)
+	    })
+
+ }  
+
+    justTesting(res_state) {
+    	var checked_citydata = this.state.citydata
+		return new Promise(function(resolve, reject) {
+				
+    	        	
+			    	 var finalcity = res_state.filter(function(rescity_state) {
+			    	 	console.log('res_state', res_state);
+    	        console.log('checked_citydata', checked_citydata)
+								if(checked_citydata){
+									return rescity_state.city === checked_citydata
+		  					       }
+								return
+								});
+					resolve(finalcity);
+				 })
+			}
+/*
 var res_state = this.state.restaurants;			  
 var checked_citydata = this.state.citydata.length > 0 ? "Chicago" : null
 var checked_price = (this.state.filterpricedata.length > 0 ) ? this.state.filterpricedata :false
@@ -68,38 +96,8 @@ justTesting(res_state).then(function(pricefilter){
 								});
 console.log('lucky1', lucky1);
 		
-	})
-}
+	})*/
 
-/*function log(pricefilter) {
-  console.log('final', pricefilter)
-
-  		 if (this.state.filterpricedata.length > 0 ){
-  		 		var arrayScores = this.state.filterpricedata.map(el => el.price);
-				 var arrayprice = (arrayScores[0]);
-				console.log('arrayprice', arrayprice);
-  		 }
-}*/
-
- if (this.state.filterpricedata.length > 0 ){
-	 		var arrayScores = this.state.filterpricedata.map(el => el.price);
-	 var arrayprice = (arrayScores[0]);
-	console.log('arrayprice', arrayprice); 
-		 function justTesting1(arrayprice) {
-		return new Promise(function(resolve, reject) {
-			resolve(arrayprice);
-		})
-
-	}
-
-	justTesting1(arrayprice).then(function(arrayprice){
-		console.log('arrayprice', arrayprice)
-		
-	})
- }
-
-
-}
 
 onStoreChange() {
 

@@ -30,76 +30,42 @@ componentWillUnmount(props) {
 
 
 componentDidUpdate() {
-
- var getdata = (this.state.filterCitydata.length > 0 || this.state.filterpricedata.length > 0)  ? this.linkcity() : null
-			
+var getdata = (this.state.filterCitydata.length > 0 || this.state.filterpricedata.length > 0)  ? this.linkcity() : null
 }
 
- linkcity(){
-
- 	var res_state = this.state.restaurants;	
+linkcity(){
+      var res_state = this.state.restaurants;	
         this.justTesting(res_state).then(function(pricefilter){
 	     console.log('pricefilter', pricefilter)
 	    })
-
- }  
+   }  
 
     justTesting(res_state) {
     	var checked_citydata = this.state.citydata
+    	var checked_price = this.state.filterpricedata
 		return new Promise(function(resolve, reject) {
-							
 							console.log(' checked_citydata',  checked_citydata);
-
-    	        			if (checked_citydata.length > 0 ) {
-
-    	        				var finalcity = checked_citydata.reduce((acc, val)=>{
-	    	        			return val === res_state.city
-	    	        			});
-
-	    	        			return
-    	        			}
+                             var finalcity = this.compare(res_state, checked_citydata);
 			    
 						resolve(finalcity);
 				 })
 			}
-/*
-var res_state = this.state.restaurants;			  
-var checked_citydata = this.state.citydata.length > 0 ? "Chicago" : null
-var checked_price = (this.state.filterpricedata.length > 0 ) ? this.state.filterpricedata :false
-  function justTesting(res_state) {
-		return new Promise(function(resolve, reject) {
-				console.log('res_state', res_state);
-    	        console.log('checked_citydata', checked_citydata);
 
-			    	 var lucky = res_state.filter(function(res_state) {
-								if(checked_citydata){
-									return res_state.city == checked_citydata
-		  					       }
-								return checked_citydata
-								});
-					resolve(lucky);
-				 })
-			}
-
-
-justTesting(res_state).then(function(pricefilter){
-		console.log('pricefilter', pricefilter)
-
-			var ducky = (checked_price.length > 0) ? checked_price : null
-			var arrayScores = ducky.map(el => el.price);
-				 var arrayprice = (arrayScores[0]);
-				console.log('arrayprice', arrayprice);
-			
-				var lucky1 = pricefilter.filter(function(pricefilter) {
-								if(checked_price){
-									return pricefilter.city === checked_price
-		  					       }
-								return checked_citydata
-								});
-console.log('lucky1', lucky1);
-		
-	})*/
-
+compare(res_state, checked_citydata){
+                        		var finalarray =[];
+                        		if (res_state && res_state.length > 0) {
+                        			
+                        			res_state.map( (el) => 
+                        				checked_citydata.map((el2) => {
+	                            			if (el.city === el2) {
+	                            				finalarray.push(el);
+	                            			}
+	                            		})
+	                            	);
+                        		}	
+                        		
+                        		return finalarray
+                             }
 
 onStoreChange() {
 

@@ -31,7 +31,7 @@ componentWillUnmount(props) {
 
 componentDidUpdate() {
 
- var getdata = (this.state.filterCitydata.length > 0)  ? this.linkcity() : null
+ var getdata = (this.state.filterCitydata.length > 0 || this.state.filterpricedata.length > 0)  ? this.linkcity() : null
 			
 }
 
@@ -47,17 +47,19 @@ componentDidUpdate() {
     justTesting(res_state) {
     	var checked_citydata = this.state.citydata
 		return new Promise(function(resolve, reject) {
-				
-    	        	
-			    	 var finalcity = res_state.filter(function(rescity_state) {
-			    	 	console.log('res_state', res_state);
-    	        console.log('checked_citydata', checked_citydata)
-								if(checked_citydata){
-									return rescity_state.city === checked_citydata
-		  					       }
-								return
-								});
-					resolve(finalcity);
+							
+							console.log(' checked_citydata',  checked_citydata);
+
+    	        			if (checked_citydata.length > 0 ) {
+
+    	        				var finalcity = checked_citydata.reduce((acc, val)=>{
+	    	        			return val === res_state.city
+	    	        			});
+
+	    	        			return
+    	        			}
+			    
+						resolve(finalcity);
 				 })
 			}
 /*

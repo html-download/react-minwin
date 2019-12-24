@@ -35,37 +35,54 @@ var getdata = (this.state.filterCitydata.length > 0 || this.state.filterpricedat
 
 linkcity(){
       var res_state = this.state.restaurants;	
-        this.justTesting(res_state).then(function(pricefilter){
-	     console.log('pricefilter', pricefilter)
-	    })
-   }  
+      var price_data = this.state.filterpricedata;
+      console.log("price_data", price_data);
+
+        this.justTesting(res_state).then(function(val_city){
+       let pricearray =[];
+       console.log("pricearray", pricearray);
+		       if (price_data && price_data.length > 0) {
+		       			let price_map = price_data.map((el2) =>
+		       			  	val_city.map((el3) => {
+		       			  		if(el2 === el3.price){
+		       			  			return el2
+		       			  		}
+		       			  	})
+		       			  )
+		       			console.log("price_map", price_map);
+                   }
+				return pricearray
+			})
+  		}  
+
+
 
     justTesting(res_state) {
     	var checked_citydata = this.state.citydata
     	var checked_price = this.state.filterpricedata
 		return new Promise(function(resolve, reject) {
 							console.log(' checked_citydata',  checked_citydata);
-                             var finalcity = this.compare(res_state, checked_citydata);
-			    
-						resolve(finalcity);
-				 })
-			}
-
-compare(res_state, checked_citydata){
-                        		var finalarray =[];
+                             let finalcity = compare(res_state, checked_citydata);
+			 				 function compare(res_state, checked_citydata){
+                        		let finalarray =[];
                         		if (res_state && res_state.length > 0) {
                         			
-                        			res_state.map( (el) => 
-                        				checked_citydata.map((el2) => {
-	                            			if (el.city === el2) {
-	                            				finalarray.push(el);
+                        			res_state.map( (res) => 
+                        				checked_citydata.map((city) => {
+	                            			if (res.city === city) {
+	                            				finalarray.push(res);
 	                            			}
 	                            		})
 	                            	);
                         		}	
                         		
-                        		return finalarray
+                        		return finalarray;
                              }
+						resolve(finalcity);
+				 })
+			}
+
+
 
 onStoreChange() {
 

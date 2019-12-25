@@ -39,34 +39,36 @@ linkcity(){
       console.log("price_data", price_data);
 
         this.justTesting(res_state).then(function(val_city){
-       let pricearray =[];
-       console.log("pricearray", pricearray);
-		       if (price_data && price_data.length > 0) {
-		       			let price_map = price_data.map((el2) =>
-		       			  	val_city.map((el3) => {
-		       			  		if(el2 === el3.price){
-		       			  			return el2
-		       			  		}
-		       			  	})
-		       			  )
-		       			console.log("price_map", price_map);
-                   }
-				return pricearray
-			})
-  		}  
-
+			
+			let final_price = priceCompare(val_city, price_data);
+			console.log(' final_price',  final_price);
+        	function priceCompare(val_city, price_data){
+        		let cityarray =[];
+        		if(price_data.length > 0 && val_city.length >0){
+								val_city.map( (res) => 
+                        				price_data.map((price) => {
+	                            			if (price === res.price) {
+	                            				cityarray.push(price);
+	                            			}
+	                            		})
+	                            	);     
+								}
+				 return cityarray;
+        	}
+		})
+  	  }  
 
 
     justTesting(res_state) {
     	var checked_citydata = this.state.citydata
     	var checked_price = this.state.filterpricedata
+		if(checked_citydata.length > 0){
 		return new Promise(function(resolve, reject) {
 							console.log(' checked_citydata',  checked_citydata);
                              let finalcity = compare(res_state, checked_citydata);
 			 				 function compare(res_state, checked_citydata){
                         		let finalarray =[];
                         		if (res_state && res_state.length > 0) {
-                        			
                         			res_state.map( (res) => 
                         				checked_citydata.map((city) => {
 	                            			if (res.city === city) {
@@ -79,7 +81,31 @@ linkcity(){
                         		return finalarray;
                              }
 						resolve(finalcity);
-				 })
+     				 })
+			   }
+			else if(checked_price.length > 0){
+					return new Promise(function(resolve, reject) {
+						if(checked_price.length > 0 && res_state.length > 0){
+								
+							let based_final_price = compare(checked_price, res_state);
+			 				 function compare(checked_price, res_state){
+                        		let price_based =[];
+                        		if (checked_price.length> 0  && res_state.length > 0) {
+                        			res_state.map( (res) => 
+                        				checked_price.map((price) => {
+	                            			if (res.price === price) {
+	                            				price_based.push(res);
+	                            			}
+	                            		})
+	                            	);
+                        		}	
+                        		
+                        		return price_based;
+                             }
+						  resolve(based_final_price);
+						}
+					})
+				}
 			}
 
 

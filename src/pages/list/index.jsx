@@ -30,38 +30,49 @@ componentWillUnmount(props) {
 
 
 componentDidUpdate() {
-var getdata = (this.state.filterCitydata.length > 0 || this.state.filterpricedata.length > 0)  ? this.linkcity() : null
+var getdata = (this.state.filterCitydata.length > 0 || this.state.pricedata.length > 0)  ? this.linkcity() : null
 }
 
 linkcity(){
       var res_state = this.state.restaurants;	
-      var price_data = this.state.filterpricedata;
+      var price_data = this.state.pricedata;
+      var sort_ing = this.state.azsort;
       console.log("price_data", price_data);
-
-        this.justTesting(res_state).then(function(val_city){
-			
+       this.justTesting(res_state).then(function(val_city){
+       	console.log('val_city', val_city);
+       	if(price_data.length > 0 ){
 			let final_price = priceCompare(val_city, price_data);
-			console.log(' final_price',  final_price);
-        	function priceCompare(val_city, price_data){
-        		let cityarray =[];
-        		if(price_data.length > 0 && val_city.length >0){
-								val_city.map( (res) => 
-                        				price_data.map((price) => {
-	                            			if (price === res.price) {
-	                            				cityarray.push(price);
-	                            			}
-	                            		})
-	                            	);     
-								}
-				 return cityarray;
-        	}
-		})
-  	  }  
+			 console.log(' final_price',  final_price);
+				function priceCompare(val_city, price_data){
+				  let cityarray =[];
+				    if(price_data.length > 0 ){
+						val_city.map( (res) => 
+				        	price_data.map((price) => {
+					    		if (res.price === price) {
+					        		cityarray.push(res);
+                                          				}
+	                                 				})
+					                    		 )   
+								       			}
+								 return cityarray;
+				        	}
+                               return final_price;
+                         }
+
+                       
+			          }).then(result => {
+			          		
+			                   console.log('result', result)
+			               
+
+						})
+
+  	}  
 
 
     justTesting(res_state) {
     	var checked_citydata = this.state.citydata
-    	var checked_price = this.state.filterpricedata
+    	var checked_price = this.state.pricedata
 		if(checked_citydata.length > 0){
 		return new Promise(function(resolve, reject) {
 							console.log(' checked_citydata',  checked_citydata);
@@ -90,14 +101,16 @@ linkcity(){
 							let based_final_price = compare(checked_price, res_state);
 			 				 function compare(checked_price, res_state){
                         		let price_based =[];
-                        		if (checked_price.length> 0  && res_state.length > 0) {
-                        			res_state.map( (res) => 
-                        				checked_price.map((price) => {
-	                            			if (res.price === price) {
-	                            				price_based.push(res);
-	                            			}
-	                            		})
-	                            	);
+                        		if (checked_price.length > 0  && res_state.length > 0) {
+
+                        			res_state.map((res) =>{
+                        				
+                        				if(res.price === 2){
+                        					price_based.push(res)
+                        				  }
+                        			 }
+                        			);
+                        		
                         		}	
                         		
                         		return price_based;
@@ -130,11 +143,11 @@ onStoreChange() {
 
  		restaurants = this.state.filterpricedata
  	}
-
+/*
  	else if ( this.state.azsort.length > 0){
 
  		restaurants = this.state.azsort
- 	}
+ 	}*/
 
  	else {
  		restaurants = this.state.restaurants
@@ -198,13 +211,16 @@ onStoreChange() {
  	 var checkvalue = e.target.checked ? true : false 
       var checkid = (checkvalue === true || checkvalue === false) ? e.target.id : null
       console.log("checkid", checkid);
+      console.log("checkvalue", checkvalue);
 
       var sortrestaurant = (this.state.restaurants).sort((a, b) => (a.name > b.name) ? 1 : -1)
       console.log("sortrestaurant", sortrestaurant);
-       Actions.sortres(sortrestaurant, checkvalue);   
+       Actions.sortres( checkvalue, sortrestaurant);   
      
  }
 render(){
+console.log('azsort', this.state.azsort)
+ console.log('pricedataaaa', this.state.pricedata);
 console.log('this.state.citydata', this.state.citydata);	
 console.log("filterCitydata", this.state.filterCitydata);
 console.log('filterpricedata', this.state.filterpricedata);

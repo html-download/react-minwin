@@ -30,15 +30,18 @@ componentWillUnmount(props) {
 
 
 componentDidUpdate() {
-var getdata = (this.state.filterCitydata.length > 0 || this.state.pricedata.length > 0)  ? this.linkcity() : null
+var getdata = (this.state.filterCitydata.length > 0 || this.state.pricedata.length > 0 || this.state.res_sort)  ? this.linkcity() : null
 }
 
 linkcity(){
       var res_state = this.state.restaurants;	
       var price_data = this.state.pricedata;
-      var sort_ing = this.state.azsort;
+      var res_sort = this.state.azsort;
+      
+     
       console.log("price_data", price_data);
        this.justTesting(res_state).then(function(val_city){
+      
        	console.log('val_city', val_city);
        	if(price_data.length > 0 ){
 			let final_price = priceCompare(val_city, price_data);
@@ -48,36 +51,40 @@ linkcity(){
 				    if(price_data.length > 0 ){
 						val_city.map( (res) => 
 				        	price_data.map((price) => {
-					    		if (res.price === price) {
+					    		if (res.price === price){
 					        		cityarray.push(res);
-                                          				}
-	                                 				})
-					                    		 )   
-								       			}
-								 return cityarray;
-				        	}
-                               return final_price;
-                         }
+                                }
+	                        })
+					    )   
+				     }
+				 return cityarray;
+			   }
+            return final_price;
+        }
 
-                       
-			          }).then(result => {
-			          		
-			                   console.log('result', result)
-			               
+        if(res_sort.length > 0 ){
+        var sort_ing = val_city.sort((a, b) => (a.name > b.name) ? 1 : -1)
+				console.log("sort_ing", sort_ing);
 
-						})
-
-  	}  
+				return sort_ing
+			}
 
 
-    justTesting(res_state) {
+         }).then(res_result => {
+         		console.log("res_result", res_result);
+		
+			 })
+	    } 
+
+
+   justTesting(res_state) {
     	var checked_citydata = this.state.citydata
     	var checked_price = this.state.pricedata
 		if(checked_citydata.length > 0){
 		return new Promise(function(resolve, reject) {
 							console.log(' checked_citydata',  checked_citydata);
                              let finalcity = compare(res_state, checked_citydata);
-			 				 function compare(res_state, checked_citydata){
+			 				  function compare(res_state, checked_citydata){
                         		let finalarray =[];
                         		if (res_state && res_state.length > 0) {
                         			res_state.map( (res) => 
@@ -88,31 +95,25 @@ linkcity(){
 	                            		})
 	                            	);
                         		}	
-                        		
                         		return finalarray;
                              }
 						resolve(finalcity);
      				 })
-			   }
-			else if(checked_price.length > 0){
+			      }
+			      else if(checked_price.length > 0){
 					return new Promise(function(resolve, reject) {
 						if(checked_price.length > 0 && res_state.length > 0){
-								
 							let based_final_price = compare(checked_price, res_state);
 			 				 function compare(checked_price, res_state){
                         		let price_based =[];
                         		if (checked_price.length > 0  && res_state.length > 0) {
-
-                        			res_state.map((res) =>{
-                        				
-                        				if(res.price === 2){
+										res_state.map((res) =>{
+                        				 if(res.price === 2){
                         					price_based.push(res)
                         				  }
-                        			 }
+                        			    }
                         			);
-                        		
-                        		}	
-                        		
+                        		  }	
                         		return price_based;
                              }
 						  resolve(based_final_price);
@@ -451,3 +452,4 @@ return(
 }
 
 export default Restaurant;
+                                           

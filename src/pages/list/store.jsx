@@ -6,6 +6,7 @@ const initialState ={
 	restaurants:[],
 	citydata:[], 
 	filterCitydata:[],
+	pricedata:[],
 	filterpricedata:[],
 	azsort:[],
 	checkoutCity: ['Chicago','Wheeling','Rock IslandRock']
@@ -19,12 +20,7 @@ const reducer = (state = initialState, action) =>{
 	return { ...state, restaurants: action.restaurants};
   }
 
-  if(action.type === Constants.RESTAURANTFILTER){
-  		if(action.checkvalue === true){
-  			console.log("{ ...state, azsort: action.sortrestaurant}", { ...state, azsort: action.sortrestaurant});
-   			return {...state, azsort: action.sortrestaurant}
-  		}
-  }
+ 
 
   if(action.type === Constants.DATAFILTER){
         if(action.checkvalue === true){
@@ -44,15 +40,24 @@ const reducer = (state = initialState, action) =>{
     if(action.type === Constants.DATAPRICE){
 			if(action.checkvalue === true){
 				
-				return{...state, filterpricedata: state.filterpricedata.concat(action.filterprice)}
+				return{...state, pricedata: state.pricedata.concat(action.checkid),
+				 filterpricedata: state.filterpricedata.concat(action.filterprice)
+				}
 			}
 			else if(action.checkvalue === false){
 				 const valueToRemove = action.checkid
-				return {...state, filterpricedata: state.filterpricedata.filter(item => item.price !== valueToRemove) }
+				return {...state, citydata: state.pricedata.filter(item => item !== valueToRemove),
+				 filterpricedata: state.filterpricedata.filter(item => item.price !== valueToRemove) }
 			}
 
 
     }
+
+ if(action.type === Constants.DATASORT){
+ 	 console.log("...state, azsort: action.sortrestaurant ", {...state, azsort: action.sortrestaurant });
+ 	return{...state, azsort: action.sortrestaurant }
+
+ 	}
 
 	return state
 }

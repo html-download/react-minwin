@@ -31,6 +31,15 @@ class Actions {
          });
      }
 
+       static sortres(checkvalue, sortrestaurant){
+
+         Store.dispatch({
+             type: Constants.DATASORT,
+             checkvalue: checkvalue,
+             sortrestaurant: sortrestaurant
+         });
+     }
+
 }
 
 export default Actions;

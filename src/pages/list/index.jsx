@@ -62,7 +62,7 @@ linkcity(){
             return final_price;
         }
 
-        if(res_sort.length > 0 ){
+        if(res_sort.length > 0 && val_city.length > 0){
         var sort_ing = val_city.sort((a, b) => (a.name > b.name) ? 1 : -1)
 				console.log("sort_ing", sort_ing);
 

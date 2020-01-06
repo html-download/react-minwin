@@ -30,19 +30,17 @@ componentWillUnmount(props) {
 
 
 componentDidUpdate() {
-var getdata = (this.state.filterCitydata.length > 0 || this.state.pricedata.length > 0 || this.state.res_sort)  ? this.linkcity() : null
+var getdata = (this.state.filterCitydata.length > 0 || this.state.pricedata.length > 0 || this.state.azsort.length > 0) 
+ ? this.linkcity() : this.state.restaurants
 }
 
 linkcity(){
       var res_state = this.state.restaurants;	
       var price_data = this.state.pricedata;
       var res_sort = this.state.azsort;
-      
-     
       console.log("price_data", price_data);
        this.justTesting(res_state).then(function(val_city){
-      
-       	console.log('val_city', val_city);
+      	console.log('val_city', val_city);
        	if(price_data.length > 0 ){
 			let final_price = priceCompare(val_city, price_data);
 			 console.log(' final_price',  final_price);
@@ -63,23 +61,21 @@ linkcity(){
         }
 
         if(res_sort.length > 0 && val_city.length > 0){
-        var sort_ing = val_city.sort((a, b) => (a.name > b.name) ? 1 : -1)
+                var sort_ing = val_city.sort((a, b) => (a.name > b.name) ? 1 : -1)
 				console.log("sort_ing", sort_ing);
-
 				return sort_ing
 			}
-
-
-         }).then(res_result => {
+		  }).then(res_result => {
          		console.log("res_result", res_result);
-		
-			 })
-	    } 
+         		this.logg(res_result)
+         		
+		})
+	} 
 
-
-   justTesting(res_state) {
+	justTesting(res_state) {
     	var checked_citydata = this.state.citydata
     	var checked_price = this.state.pricedata
+    	var checked_sort = this.state.azsort
 		if(checked_citydata.length > 0){
 		return new Promise(function(resolve, reject) {
 							console.log(' checked_citydata',  checked_citydata);
@@ -120,6 +116,13 @@ linkcity(){
 						}
 					})
 				}
+				else if(checked_sort.length > 0 && res_state.length > 0){
+					return new Promise(function(resolve, reject) {
+					  var sort_ing_restaurant = res_state.sort((a, b) => (a.name > b.name) ? 1 : -1)
+					   console.log("sort_ing_restaurant", sort_ing_restaurant);
+						resolve(sort_ing_restaurant);
+				     })
+				}
 			}
 
 
@@ -129,32 +132,16 @@ onStoreChange() {
         this.setState(Store.getState());
  }
 
+
+ 	logg(res_result){
+     			return res_result;
+     		}
  getListItem(){
-    console.log('stateee', this.state.restaurants);
- 	const restaurant = this.state.restaurants;
- 	console.log('restaurant', restaurant);
- 		var restaurants;
 
- 	if(this.state.filterCitydata.length > 0 ){
+ 	
 
- 	    restaurants = this.state.filterCitydata
-
- 	}
- 	else if ( this.state.filterpricedata.length > 0){
-
- 		restaurants = this.state.filterpricedata
- 	}
-/*
- 	else if ( this.state.azsort.length > 0){
-
- 		restaurants = this.state.azsort
- 	}*/
-
- 	else {
- 		restaurants = this.state.restaurants
- 	}
-
-      const displaylist = (restaurants && restaurants.length > 0) ? 
+ var restaurants =  this.state.restaurants
+ const displaylist = (restaurants && restaurants.length > 0) ? 
        restaurants.map((restaurants) => { 
                 console.log('restaurantss', restaurants)
                 return (<Restaurantlist {...this.state} data={restaurants}/>)

@@ -9,7 +9,8 @@ const initialState ={
 	pricedata:[],
 	filterpricedata:[],
 	azsort:[],
-	checkoutCity: ['Chicago','Wheeling','Rock IslandRock']
+	checkoutCity: ['Chicago','Wheeling','Rock IslandRock'],
+	filterresult:[]
 
 }
 
@@ -57,6 +58,10 @@ const reducer = (state = initialState, action) =>{
  	 console.log("...state, azsort: action.sortrestaurant ", {...state, azsort: action.sortrestaurant });
  	return{...state, azsort: action.sortrestaurant }
 
+ 	}
+
+ 	if(action.type === Constants.FILTERRESULT){
+ 		return{...state, filterresult: action.resresult}
  	}
 
 	return state

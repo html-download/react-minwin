@@ -40,6 +40,12 @@ class Actions {
          });
      }
 
+static filterresult(result){
+         Store.dispatch({
+             type: Constants.FILTERRESULT,
+             resresult: result
+         });
+     }
 }
 
 export default Actions;

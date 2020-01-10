@@ -31,8 +31,9 @@ componentWillUnmount(props) {
 
 componentDidUpdate(prevProps, prevState) {
 
-if((this.state.filterCitydata.length > 0 || this.state.pricedata.length > 0 || this.state.azsort.length > 0) && 
-	(prevState.filterresult !== this.state.filterresult && this.state.filterresult.length === 0))
+if((this.state.filterCitydata.length > 0 || this.state.pricedata.length > 0 || 
+	this.state.azsort.length > 0) && (prevState.filterresult !== this.state.filterresult || this.state.filterresult.length == 0)
+)
 	{
 		this.linkcity()
 	}
@@ -80,8 +81,8 @@ linkcity(){
 				return sort_ing
 			}
 		  }).then(result => {
-		  	console.log("result", result);
-		  
+		  	console.log("resulttt", result);
+			//Actions.filterresult(result)
 		})
 	} 
 
@@ -150,7 +151,7 @@ onStoreChange() {
 
 
 
-   var restaurants =  this.state.restaurants
+   var restaurants =  (this.state.filterresult.length > 0) ?  this.state.filterresult : this.state.restaurants
   const displaylist = (restaurants && restaurants.length > 0) ? 
        restaurants.map((restaurants) => { 
                 console.log('restaurantss', restaurants)
@@ -221,8 +222,8 @@ render(){
  console.log('pricedataaaa', this.state.pricedata);
 console.log('this.state.citydata', this.state.citydata);	
 console.log("filterCitydata", this.state.filterCitydata);
-console.log('filterpricedata', this.state.filterpricedata);
-console.log('filterresult', this.state.filterresult)*/
+console.log('filterpricedata', this.state.filterpricedata);*/
+console.log('filterresult', this.state.filterresult)
 return(
 
  <div className="page_content full_row">

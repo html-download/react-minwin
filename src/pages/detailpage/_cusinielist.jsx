@@ -1,31 +1,28 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-class cusinielist extends Component{
+class Cusinielist extends Component{
 
 constructor(props){
   super(props);
   this.state = this.props
-  console.log("this.props", this.props);
+  console.log("this.state.cusinedata", this.state.cusinedata);
 }
 render(){
    
-   const id = this.state.data.id;
-    const details = this.state.data
-
-   //console.log("id", id);
-  
+   const cusine_detail =  this.state.cusinedata
+   console.log("cusine_detail", cusine_detail);
  return(
 
         <div className="menu_list">
                             
                             <div className="img">
                               <a href="menu-detail.html">
-                                <img src="images/item_1.jpg" />
+                                <img src={cusine_detail.category_image} />
                               </a>
                             </div>
                             <h5>
-                              <a href="menu-detail.html">Chilli Chicken</a>
+                              <a href="menu-detail.html">{cusine_detail.category_name}</a>
                             </h5>
                             <p className="grey_text">
                               Lorem ipsum dolor sit amet, consectetur adipiscing
@@ -45,6 +42,6 @@ render(){
  }
 }
 
-export default cusinielist;
+export default Cusinielist;
 
 

@@ -19,7 +19,7 @@ import scrollToComponent from "react-scroll-to-component";
 // components
 import Store from './store';
 import Actions from './action';
-import cusinielist from './_cusinielist.jsx';
+import Cusinielist from './_cusinielist.jsx';
 // json
 //var data = require('./api.json');
 
@@ -98,15 +98,16 @@ onStoreChange() {
 
  getcusinieitem(){
 
-      var cusinieslist =  this.state.cusiniedata;
+      var cusinieslist =(this.state.cusiniedata && this.state.cusiniedata.length > 0) ?  this.state.cusiniedata : null
 
-     console.log('this.state.cusiniedataa',  this.state.cusiniedata);
-    
-     var cusinie = cusinieslist ?
+      console.log("cusinieslist", cusinieslist);
+    console.log('this.state.cusiniedataa',  this.state.cusiniedata);
+    var cusinie = (cusinieslist && cusinieslist.length > 0) ?
 
       cusinieslist.map((cusine) => { 
+        console.log("cusinee", cusine);
               
-                return (<cusinielist {...this.state} key={cusine.id * Math.random()} data={cusine}/>)
+                return (<Cusinielist {...this.state} key={cusine.id * Math.random()} cusinedata={cusine}/>)
         }) : null 
 
      return cusinie
@@ -303,16 +304,13 @@ var detail = this.props.location.restaurant_data !== undefined ? this.props.loca
                         </div>
 
                         <div className="col-sm-6 menus">
-                         <h4   ref={section => {
+                         <h4 ref={section => {
                               this.Violet = section;
                             }}>Starters</h4>
-                        
-                         
 
-                              {this.getcusinieitem()}
+                        {this.getcusinieitem()}
 
-
-                            <h4 ref={section => {
+                       <h4 ref={section => {
                               this.Indigo = section;
                             }}>Veg Main</h4>
 
@@ -356,34 +354,8 @@ var detail = this.props.location.restaurant_data !== undefined ? this.props.loca
         aaaaaaaaaaaaaaaa
     </ModalBody>
 </Modal>
+ </div>
 
-
-                          </div>
-
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-  Launch demo modal
-</button>
-
-
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
                           <div className="menu_list">
                             <div className="img">
                               <a href="menu-detail.html">

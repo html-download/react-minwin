@@ -1,0 +1,148 @@
+{ 
+    "status":200,
+        "data":[ 
+            { 
+            "category":{ 
+                "starters":[ 
+                    { 
+                    "category_name":"Pizza",
+                    "category_image":"https://ontabee.s3.amazonaws.com/casamia-pizzeria/category/pizza-3007395__340.jpg",
+                    "category_status":1,
+                    "category_price":200,
+                    "category_content":"ipsum dolor sit amet, consectetur adipiscing elit. Mauris malesuada mollis risus, ut ultricies nisl viverra."
+                    },
+                    { 
+                    "category_name":"PIZZABRÖTCHEN",
+                    "category_image":"https://ontabee.s3.amazonaws.com/casamia-pizzeria/category/pizza-3007395__340.jpg",
+                    "category_status":0,
+                    "category_price":230,
+                    "category_content":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris malesuada mollis risus, ut ultricies nisl viverra."
+                    },
+                    { 
+                    "category_name":"CALZONE GEFÜLTE PIZZA",
+                    "category_image":"https://ontabee.s3.amazonaws.com/casamia-pizzeria/category/pizza-3007395__340.jpg",
+                    "category_status":0,
+                    "category_price":230,
+                    "category_content":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris malesuada mollis risus, ut ultricies nisl viverra."
+                    }
+                ],
+                 "Veg Main":[
+                            { "category_name": "Chilli Chicken",
+                              "category_image": "https://ontabee.s3.amazonaws.com/casamia-pizzeria/category/pizza-3007395__340.jpg",
+                              "category_status": 1,
+                              "category_price": 200,
+                              "category_content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris malesuada mollis risus, ut ultricies nisl viverra."
+                            },
+                             { "category_name": "Chicken Monica",
+                              "category_image": "https://ontabee.s3.amazonaws.com/casamia-pizzeria/category/pizza-3007395__340.jpg",
+                              "category_status": 0,
+                              "category_price": 230,
+                              "category_content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris malesuada mollis risus, ut ultricies nisl viverra."
+                            },
+                            { "category_name": "Chukka",
+                              "category_image": "https://ontabee.s3.amazonaws.com/casamia-pizzeria/category/pizza-3007395__340.jpg",
+                              "category_status": 0,
+                              "category_price": 230,
+                              "category_content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris malesuada mollis risus, ut ultricies nisl viverra."
+                            }
+                      ],
+                  "Non Veg Main":[
+                            { "category_name": "Chilli Chicken",
+                              "category_image": "https://ontabee.s3.amazonaws.com/casamia-pizzeria/category/pizza-3007395__340.jpg",
+                              "category_status": 1,
+                              "category_price": 200,
+                              "category_content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris malesuada mollis risus, ut ultricies nisl viverra."
+                            },
+                             { "category_name": "Chicken Monica",
+                              "category_image": "https://ontabee.s3.amazonaws.com/casamia-pizzeria/category/pizza-3007395__340.jpg",
+                              "category_status": 0,
+                              "category_price": 230,
+                              "category_content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris malesuada mollis risus, ut ultricies nisl viverra."
+                            },
+                            { "category_name": "Chukka",
+                              "category_image": "https://ontabee.s3.amazonaws.com/casamia-pizzeria/category/pizza-3007395__340.jpg",
+                              "category_status": 0,
+                              "category_price": 230,
+                              "category_content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris malesuada mollis risus, ut ultricies nisl viverra."
+                            }
+                        ],
+                  "Soups":[
+                            { "category_name": "Chilli Chicken",
+                              "category_image": "https://ontabee.s3.amazonaws.com/casamia-pizzeria/category/pizza-3007395__340.jpg",
+                              "category_status": 1,
+                              "category_price": 200,
+                              "category_content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris malesuada mollis risus, ut ultricies nisl viverra."
+                            },
+                             { "category_name": "Chicken Monica",
+                              "category_image": "https://ontabee.s3.amazonaws.com/casamia-pizzeria/category/pizza-3007395__340.jpg",
+                              "category_status": 0,
+                              "category_price": 230,
+                              "category_content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris malesuada mollis risus, ut ultricies nisl viverra."
+                            },
+                            { "category_name": "Chukka",
+                              "category_image": "https://ontabee.s3.amazonaws.com/casamia-pizzeria/category/pizza-3007395__340.jpg",
+                              "category_status": 0,
+                              "category_price": 230,
+                              "category_content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris malesuada mollis risus, ut ultricies nisl viverra."
+                            }
+                        ],
+                  "Desserts":[
+                            { "category_name": "Chilli Chicken",
+                              "category_image": "https://ontabee.s3.amazonaws.com/casamia-pizzeria/category/pizza-3007395__340.jpg",
+                              "category_status": 1,
+                              "category_price": 200,
+                              "category_content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris malesuada mollis risus, ut ultricies nisl viverra."
+                            },
+                             { "category_name": "Chicken Monica",
+                              "category_image": "https://ontabee.s3.amazonaws.com/casamia-pizzeria/category/pizza-3007395__340.jpg",
+                              "category_status": 0,
+                              "category_price": 230,
+                              "category_content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris malesuada mollis risus, ut ultricies nisl viverra."
+                            },
+                            { "category_name": "Chukka",
+                              "category_image": "https://ontabee.s3.amazonaws.com/casamia-pizzeria/category/pizza-3007395__340.jpg",
+                              "category_status": 0,
+                              "category_price": 230,
+                              "category_content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris malesuada mollis risus, ut ultricies nisl viverra."
+                            }
+                        ],
+                  "Meals":[
+                            { "category_name": "Chilli Chicken",
+                              "category_image": "https://ontabee.s3.amazonaws.com/casamia-pizzeria/category/pizza-3007395__340.jpg",
+                              "category_status": 1,
+                              "category_price": 200,
+                              "category_content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris malesuada mollis risus, ut ultricies nisl viverra."
+                            },
+                             { "category_name": "Chicken Monica",
+                              "category_image": "https://ontabee.s3.amazonaws.com/casamia-pizzeria/category/pizza-3007395__340.jpg",
+                              "category_status": 0,
+                              "category_price": 230,
+                              "category_content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris malesuada mollis risus, ut ultricies nisl viverra."
+                            },
+                            { "category_name": "Chukka",
+                              "category_image": "https://ontabee.s3.amazonaws.com/casamia-pizzeria/category/pizza-3007395__340.jpg",
+                              "category_status": 0,
+                              "category_price": 230,
+                              "category_content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris malesuada mollis risus, ut ultricies nisl viverra."
+                            }
+                        ]
+                },
+
+                "restaurant_details":{
+                   "restaurant_image": [
+                        {
+                            "status": "Open",
+                            "type": "non-veg",
+                            "item_image_path": "https://ontabee.s3.amazonaws.com/casamia-pizzeria/item/BkgpiB8slcL0LkcL.jpg"
+                        }
+                    ],
+                     "restauarnt_rating": 4.0,
+                      "Delivery_fee": 100,
+                      "Min_order": 50,
+                      "Delivery_time": "20 mins",
+                      "Delivery_type": "Pickup"
+                }
+
+            }
+        ]
+}

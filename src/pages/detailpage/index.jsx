@@ -98,17 +98,34 @@ onStoreChange() {
 
  getcusinieitem(){
 
-      var cusinieslist =(this.state.cusiniedata && this.state.cusiniedata.length > 0) ?  this.state.cusiniedata : null
+  
+    var cusinieslist =(this.state.cusiniedata && this.state.cusiniedata.length > 0) ?  this.state.cusiniedata : null
+    console.log("this.state.cusiniedataa", this.state.cusiniedata);
 
       console.log("cusinieslist", cusinieslist);
-    console.log('this.state.cusiniedataa',  this.state.cusiniedata);
-    var cusinie = (cusinieslist && cusinieslist.length > 0) ?
+    
+      var cusinie = (cusinieslist && cusinieslist.length > 0) ?
+       cusinieslist
+           .map(cusine => {
+             console.log("cusine", cusine);
+             return cusine.category
+           })
+           .map(course => { 
+             console.log("course", course);
+             return Object.entries(course)
+           })
+           .map(ingre => {
 
-      cusinieslist.map((cusine) => { 
-        console.log("cusinee", cusine);
+              console.log("ingre", ingre);
+             return Object.entries(ingre)
               
-                return (<Cusinielist {...this.state} key={cusine.id * Math.random()} cusinedata={cusine}/>)
-        }) : null 
+            
+           }).map(item => {
+              console.log("item", item);
+               //return <Cusinielist {...this.state}  cusinedata={item} />
+           }) : null
+
+   console.log("cusinne", cusinie);
 
      return cusinie
 }

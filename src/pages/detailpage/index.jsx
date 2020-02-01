@@ -103,31 +103,30 @@ onStoreChange() {
     console.log("this.state.cusiniedataa", this.state.cusiniedata);
 
       console.log("cusinieslist", cusinieslist);
+
+        
     
       var cusinie = (cusinieslist && cusinieslist.length > 0) ?
-       cusinieslist
-           .map(cusine => {
-             console.log("cusine", cusine);
-             return cusine.category
-           })
-           .map(course => { 
-             console.log("course", course);
-             return Object.entries(course)
-           })
-           .map(ingre => {
+                
 
-              console.log("ingre", ingre);
-             return Object.entries(ingre)
-              
-            
-           }).map(item => {
-              console.log("item", item);
-               //return <Cusinielist {...this.state}  cusinedata={item} />
-           }) : null
+                 Object.keys(cusinieslist[0].category).map(cusine =>{
+                     console.log('cusine', cusine)
+                     return cusinieslist[0].category[cusine].map(course =>{
+                       console.log("course", course);
+                       return course;
+                     });
+                 }):null
 
-   console.log("cusinne", cusinie);
 
-     return cusinie
+              // return <Cusinielist {...this.state}  cusinedata={item} />
+           
+        
+
+  // console.log("cusinne", cusinie);
+/*Object.values(schema).forEach(o => 
+  Object.values(o).forEach(a => output.push(a.type))
+)*/
+    // return cusinie
 }
 
   render() {
@@ -359,7 +358,10 @@ var detail = this.props.location.restaurant_data !== undefined ? this.props.loca
                             </a>
                                 
 
-<Modal isOpen={ this.state.modal } toggle={ this.modal } modalClassName="login_modal">
+<Modal 
+isOpen={ this.state.modal }
+ toggle={ this.modal }
+  modalClassName="login_modal">
     <ModalHeader toggle={ this.modal }>
         <h5 className="modal-title">
         Login </h5> 

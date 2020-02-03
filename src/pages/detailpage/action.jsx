@@ -11,6 +11,15 @@ class Actions {
 
    }
 
+   static popup(modal) {
+
+   		Store.dispatch({
+   			type: Constants.MODALPOPUP,
+   			modal: modal
+   		});
+
+   }
+
 }
 
 export default Actions;

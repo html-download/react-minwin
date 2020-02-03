@@ -32,10 +32,12 @@ class Detailpage extends Component {
     this.toggle = this.toggle.bind(this);
     this.state = {
       activeTab: "1",
-         modal: false
+        // modal: false
     };
+
      this.toggle = this.toggle.bind(this);
-        this.modal = this.modal.bind(this);
+
+    this.modal = this.modal.bind(this);
   }
 
  toggle() {
@@ -43,10 +45,15 @@ class Detailpage extends Component {
             dropdownOpen: !prevState.dropdownOpen
         }));
     }
+
     modal() {
-        this.setState(prevState => ({
+
+      let value = true
+     Actions.popup(value);
+
+       {/* this.setState(prevState => ({
             modal: !prevState.modal
-        }));
+        }));  */}
     }
 
   toggle(tab) {
@@ -104,9 +111,21 @@ onStoreChange() {
 
       console.log("cusinieslist", cusinieslist);
 
-        
+        var cusinies = (cusinieslist && cusinieslist.length > 0) ?
+                
+
+                 Object.keys(cusinieslist[0].category).map(cusine =>{
+                     console.log('cusine', cusine)
+                     return cusinieslist[0].category[cusine].map(course =>{
+                       console.log("course", course);
+                       return <Cusinielist {...this.state}  cusinedata={course} cusinetitle={cusine} />
+                     });
+                 }):null
+
+        return cusinies
+             
     
-      var cusinie = (cusinieslist && cusinieslist.length > 0) ?
+     {/* var cusinies = (cusinieslist && cusinieslist.length > 0) ?
                 
 
                  Object.keys(cusinieslist[0].category).map(cusine =>{
@@ -117,20 +136,15 @@ onStoreChange() {
                      });
                  }):null
 
-
-              // return <Cusinielist {...this.state}  cusinedata={item} />
-           
-        
-
-  // console.log("cusinne", cusinie);
-/*Object.values(schema).forEach(o => 
-  Object.values(o).forEach(a => output.push(a.type))
-)*/
-    // return cusinie
+        return cusinies
+               return <Cusinielist {...this.state}  cusinedata={item} />*/}
+ 
 }
 
   render() {
   
+  const modl = this.state.modal
+  console.log("modl", modl);
 
 
 var detail = this.props.location.restaurant_data !== undefined ? this.props.location.restaurant_data : null

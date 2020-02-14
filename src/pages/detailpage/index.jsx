@@ -13,7 +13,13 @@ import {
   Row,
   Col
 } from "reactstrap";
-import {Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import Modal from 'react-bootstrap/Modal';
+import ModalDialog from 'react-bootstrap/ModalDialog';
+import ModalHeader from 'react-bootstrap/ModalHeader';
+import ModalTitle from 'react-bootstrap/ModalTitle';
+import ModalBody from 'react-bootstrap/ModalBody';
+import ModalFooter from 'react-bootstrap/ModalFooter';
+
 import classnames from "classnames";
 import scrollToComponent from "react-scroll-to-component";
 // components
@@ -32,12 +38,16 @@ class Detailpage extends Component {
     this.toggle = this.toggle.bind(this);
     this.state = {
       activeTab: "1",
+      show:false,
+      listdata: ""
+      
         // modal: false
     };
 
      this.toggle = this.toggle.bind(this);
 
-    this.modal = this.modal.bind(this);
+    this.showModal = this.showModal.bind(this);
+    this.hideModal = this.hideModal.bind(this);
   }
 
  toggle() {
@@ -46,14 +56,19 @@ class Detailpage extends Component {
         }));
     }
 
-    modal() {
+ showModal(checkcry) {
+   
+        this.setState({
+          show: true,
+          listdata: checkcry
+        });
 
-      let value = true
-     Actions.popup(value);
+  console.log("checkcry::",checkcry);
+    }
 
-       {/* this.setState(prevState => ({
-            modal: !prevState.modal
-        }));  */}
+
+    hideModal() {
+        this.setState({show: false});
     }
 
   toggle(tab) {
@@ -118,7 +133,11 @@ onStoreChange() {
                      console.log('cusine', cusine)
                      return cusinieslist[0].category[cusine].map(course =>{
                        console.log("course", course);
-                       return <Cusinielist {...this.state}  cusinedata={course} cusinetitle={cusine} />
+                       return <Cusinielist {...this.state} 
+                        cusinedata={course} 
+                        cusinetitle={cusine} 
+                        showModal={this.showModal}
+                        hideModal={this.hideModal}/>
                      });
                  }):null
 
@@ -141,10 +160,13 @@ onStoreChange() {
  
 }
 
+
   render() {
   
   const modl = this.state.modal
   console.log("modl", modl);
+
+
 
 
 var detail = this.props.location.restaurant_data !== undefined ? this.props.location.restaurant_data : null
@@ -152,6 +174,7 @@ var detail = this.props.location.restaurant_data !== undefined ? this.props.loca
 
     return (
       <div>
+
         <div className="page_content full_row">
           <div className="container">
             <ul className="breadcrumb reset">
@@ -334,9 +357,11 @@ var detail = this.props.location.restaurant_data !== undefined ? this.props.loca
                         </div>
 
                         <div className="col-sm-6 menus">
+                        
                          <h4 ref={section => {
                               this.Violet = section;
-                            }}>Starters</h4>
+                            }}>Starter</h4>
+
 
                         {this.getcusinieitem()}
 
@@ -353,7 +378,7 @@ var detail = this.props.location.restaurant_data !== undefined ? this.props.loca
                               </a>
                             </div>
                             <h5>
-                              <a href="menu-detail.html">Chilli Chicken</a>
+                              <a href="menu-detail.html">Chilliii Chicken</a>
                             </h5>
                             <p className="grey_text">
                               Lorem ipsum dolor sit amet, consectetur adipiscing
@@ -362,32 +387,8 @@ var detail = this.props.location.restaurant_data !== undefined ? this.props.loca
                             </p>
                             <span className="price">SAR 50.00</span>
                             
-                            <a
-                              data-toggle="modal"
-                              data-target="#modal_ingredients"
-                              className="btn"
-                               onClick={ this.modal }
-                            >
-                              <i className="fa fa-plus-circle" /> Add
-                            </a>
-                                
 
-<Modal 
-isOpen={ this.state.modal }
- toggle={ this.modal }
-  modalClassName="login_modal">
-    <ModalHeader toggle={ this.modal }>
-        <h5 className="modal-title">
-        Login </h5> 
-      
-    </ModalHeader>
-
-    <ModalBody >
-        
-        aaaaaaaaaaaaaaaa
-    </ModalBody>
-</Modal>
- </div>
+                       </div>
 
                           <div className="menu_list">
                             <div className="img">
@@ -874,7 +875,28 @@ isOpen={ this.state.modal }
             </div>
           </div>
         </div>
+                                <Modal
+                                 show={this.state.show}
+                                  onHide={this.hideModal}
+                                  dialogClassName="custom-modal"
+                                >
+
+                                <Modal.Header closeButton>
+                                  <Modal.Title id="contained-modal-title-lg">Modal heading</Modal.Title>
+                                </Modal.Header>
+
+                                <Modal.Body>
+                                   <ul>
+                                      {this.state.listdata}
+                                   </ul>
+                                </Modal.Body>
+
+                                <Modal.Footer>
+                                  <Button onClick={this.hideModal}>Close</Button>
+                                </Modal.Footer>  
+                              </Modal>
       </div>
+
     );
   }
 }
